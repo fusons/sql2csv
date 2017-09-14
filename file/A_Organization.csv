@@ -1,0 +1,13 @@
+OrganizationId,OrgName,ShortCode,CustomerId,CustomerNumber,CustomerName
+84,OU_广州索菲亚,OU_GZ,3316,GZSOGAL,广州索菲亚家具制品公司
+85,OU_索菲亚家居,OU_SFY,3338,SOGAL,索菲亚家居股份有限公司
+101,OU_广州易福诺,YFN,3317,EFSOGAL,广州易福诺木业有限公司
+121,OU_成都索菲亚,OU_CD,2936,P03000,索菲亚家居（成都）有限公司
+192,OU_廊坊索菲亚,OU_LF,205356,P07000,索菲亚家居（廊坊）有限公司
+208,OU_浙江索菲亚,OU_ZJ,205359,P08000,索菲亚家居（浙江）有限公司
+281,OU_司米厨柜,OU_厨柜,643405,P20000,司米厨柜
+341,OU_湖北索菲亚,OU_HB,736494,P06000,索菲亚家居（湖北）有限公司
+387,OU_舒适易佰,OU_SS100,0,,
+388,OU_上海大振,OU_SHDZ,0,,
+389,OU_舒适家居,OU_SSJJ,0,,
+427,OU_宁基智能,OU_NJZN,0,,

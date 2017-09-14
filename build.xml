@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="sql2csv" basedir="." default="jar">
+	<!--定义全局选项--> 
+	<property name="build.dir" value="${basedir}/bin"/>
+	<property name="src.dir" value="${basedir}/src"/>
+	<property name="target.dir" value="${basedir}/build"/>
+
+	<!--定义classpath--> 
+	<path id="compile.classpath">
+		<fileset dir="${basedir}/lib" includes="*.jar"/>
+	</path>
+
+	<!--定义javac编译选项--> 
+	<property name="compiler.args" value="-encoding UTF-8 -Xlint:deprecation"/>
+	<patternset id="compiler.resources">
+		<exclude name="**/*.java"/>
+	</patternset>
+
+	<!--删除编译后目标文件夹--> 
+	<target name="clear" description="清除Classes目录">
+		 <delete dir="${build.dir}" failonerror="false" />
+	</target>
+
+	<!--javac编译文件，includeantruntime="on" 此参数不带有警告--> 
+	<target name="compile" depends="clear" description="编译Java文件并复制资源文件">
+		<mkdir dir="${build.dir}"/>
+		<javac destdir="${build.dir}" debug="true" includeantruntime="on">
+			<compilerarg line="${compiler.args}"/>
+			<src path="${src.dir}"/>
+			<classpath refid="compile.classpath"/>
+		</javac>
+		<copy_resource resources.dir="${src.dir}" build.dir="${build.dir}"/>
+	</target>
+
+	<!--打包jar文件--> 
+	<target name="jar" depends="compile" description="打包文件">
+		<tstamp>
+	    	<format property="now" pattern="yyyy-MM-dd HH:mm:ss"/>
+			<format property="now2" pattern="MMdd.HHmm"/>
+			<format property="ver" pattern="DDD"/>
+		</tstamp>
+		<jar jarfile="${basedir}/bin/sql2csv-fu.jar" basedir="${build.dir}"
+					includes="**/*.class **/*.xml **/*.properties **/*.js">
+			<manifest>
+				<attribute name="Implementation-Version" value="1.${now2}" />
+			</manifest>
+		</jar>
+		<delete dir="${build.dir}/com" failonerror="false" />
+		<delete dir="${build.dir}/META-INF" failonerror="false" />
+	</target>
+
+	<!--压缩程序包为gzip--> 
+	<target name="tar" depends="jar" description="将运行环境打成Tar包">
+		<tar destfile="${basedir}/bin/sql2csv-fu.jar" basedir="." compression="gzip"/>
+	</target>
+
+	<!--打包jar文件--> 
+	<macrodef name="copy_resource">
+		<attribute name="build.dir"/>
+		<attribute name="resources.dir"/>
+		<sequential>		
+			<copy todir="@{build.dir}">
+				<fileset dir="@{resources.dir}">
+					<patternset refid="compiler.resources"/>
+				</fileset>
+			</copy>
+		</sequential>
+	</macrodef>
+
+
+</project>
